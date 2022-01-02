@@ -305,6 +305,8 @@ def pie_plot(
     if legend_kws is None:
         legend_kws = {}
 
+    colors = config.plot.pie.colors
+
     def make_autopct(values: pd.Series) -> Callable:
         def my_autopct(pct: float) -> str:
             total = np.sum(values)
@@ -313,7 +315,8 @@ def pie_plot(
 
         return my_autopct
 
-    wedges, _, _ = plt.pie(data, autopct=make_autopct(data), textprops={"color": "w"})
+    wedges, _, _ = plt.pie(data, autopct=make_autopct(data), textprops={"color": "w"},
+    colors=colors)
     plt.legend(wedges, data.index.values, **legend_kws)
 
     return plot_360_n0sc0pe(config)
